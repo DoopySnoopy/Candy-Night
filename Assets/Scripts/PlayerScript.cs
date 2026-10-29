@@ -70,11 +70,6 @@ public class PlayerScript : MonoBehaviour
         }
         // Changed for gravity
         RB.linearVelocity = vel;
-
-        if (transform.position.x >= 3.2f)
-        {
-            SceneManager.LoadScene("Scene 1");
-        }
     }
     //This gets called whenever you bump into another object, like a wall or coin.
     private void OnCollisionEnter2D(Collision2D other)
