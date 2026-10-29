@@ -18,15 +18,13 @@ public class PlayerScript : MonoBehaviour
     //The Rigidbody2D is a component that gives the player physics, and is what we use to move
     public Rigidbody2D RB;
 
-    //TextMeshPro is a component that draws text on the screen.
-    //We use this one to show our score.
-    public TextMeshPro ScoreText;
+    public TextMeshProUGUI CandyText;
     
     //This will control how fast the player moves
     public float Speed = 3;
     
     //This is how many points we currently have
-    public int Score = 0;
+    public int Candy = 0;
 
     public float JumpForce = 5f;
     public bool Ground = false;
@@ -36,7 +34,7 @@ public class PlayerScript : MonoBehaviour
     {
         healthBar.SetMaxHealth(MaxHealth);
         //During setup we call UpdateScore to make sure our score text looks correct
-        UpdateScore();
+        UpdateCandy();
     }
 
     //Update is a lot like Start, but it automatically gets triggered once per frame
@@ -95,16 +93,16 @@ public class PlayerScript : MonoBehaviour
         }
         
         //This checks to see if the thing you bumped into has the CoinScript script on it
-        CoinScript coin = other.gameObject.GetComponent<CoinScript>();
+        CandyScript candy = other.gameObject.GetComponent<CandyScript>();
         //If it does, run the code block belows
-        if (coin != null)
+        if (candy != null)
         {
             //Tell the coin that you bumped into them so they can self destruct or whatever
-            coin.GetBumped();
+            candy.GetBumped();
             //Make your score variable go up by one. . .
-            Score++;
+            Candy++;
             //And then update the game's score text
-            UpdateScore();
+            UpdateCandy();
         }
         if (other.gameObject.CompareTag("Ground"))
         {
@@ -121,14 +119,11 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    //This function updates the game's score text to show how many points you have
-    //Even if your 'score' variable goes up, if you don't update the text the player doesn't know
-    public void UpdateScore()
+    public void UpdateCandy()
     {
-        ScoreText.text = "Score: " + Score;
+        CandyText.text = "" + Candy;
     }
 
-    //If this function is called, the player character dies. The game goes to a 'Game Over' screen.
     public void Die()
     {
         SceneManager.LoadScene("Game Over");
