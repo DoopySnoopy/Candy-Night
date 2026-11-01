@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour
 {
 
+    public CameraController cameraController;
+
     public float Health, MaxHealth;
 
     [SerializeField]
@@ -21,7 +23,7 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI CandyText;
     
     //This will control how fast the player moves
-    public float Speed = 3;
+    public float Speed = 2.5f;
     
     //This is how many points we currently have
     public int Candy = 0;
@@ -70,6 +72,7 @@ public class PlayerScript : MonoBehaviour
         }
         // Changed for gravity
         RB.linearVelocity = vel;
+
     }
     //This gets called whenever you bump into another object, like a wall or coin.
     private void OnCollisionEnter2D(Collision2D other)
@@ -104,6 +107,14 @@ public class PlayerScript : MonoBehaviour
             Ground = true;
         }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Screen"))
+        {
+            cameraController.SetTarget(other.transform.position);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D other)
