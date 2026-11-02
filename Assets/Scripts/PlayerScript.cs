@@ -23,7 +23,7 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI CandyText;
     
     //This will control how fast the player moves
-    public float Speed = 2.5f;
+    public float Speed = 2f;
     
     //This is how many points we currently have
     public int Candy = 0;
