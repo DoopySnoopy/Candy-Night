@@ -4,7 +4,7 @@ public class SkeletonController : MonoBehaviour
 {
 
     public int damageAmount = 20;
-    public float bounceForce = 5f;
+    public float bounceForce = 3f;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
