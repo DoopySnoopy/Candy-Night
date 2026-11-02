@@ -10,6 +10,7 @@ public class StartScreenScript : MonoBehaviour
         if(Keyboard.current.zKey.wasPressedThisFrame)
         {
             SceneManager.LoadScene("Beginning of Game");
+
         }
     }
 }

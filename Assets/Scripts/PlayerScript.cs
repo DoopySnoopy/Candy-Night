@@ -29,23 +29,22 @@ public class PlayerScript : MonoBehaviour
     public int Candy = 0;
 
     public float JumpForce = 5f;
+
+    public Transform groundedCheck;
+    public float groundedCheckRad = 0.2f;
+    public LayerMask groundLayer;
     public bool Ground = false;
 
-    //Start automatically gets triggered once when the objects turns on/the game starts
     void Start()
     {
         healthBar.SetMaxHealth(MaxHealth);
-        //During setup we call UpdateScore to make sure our score text looks correct
         UpdateCandy();
     }
 
-    //Update is a lot like Start, but it automatically gets triggered once per frame
-    //Most of an object's code will be called from Update--it controls things that happen in real time
     void Update()
     {
-        //The code below controls the character's movement
-        //First we make a variable that we'll use to record how we want to move
-        //Changed for gravity
+        Ground = Physics2D.OverlapCircle(groundedCheck.position, groundedCheckRad, groundLayer);
+   
         Vector2 vel = RB.linearVelocity;
 
         //Then we use if statement to figure out what that variable should look like
@@ -114,14 +113,6 @@ public class PlayerScript : MonoBehaviour
         if (other.CompareTag("Screen"))
         {
             cameraController.SetTarget(other.transform.position);
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            Ground = false;
         }
     }
 
